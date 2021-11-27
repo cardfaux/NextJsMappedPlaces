@@ -1,0 +1,16 @@
+{
+  "verbose": true,
+  "ignore": [
+    "node_modules",
+    ".next",
+    "components",
+    "models",
+    "pages",
+    "public",
+    "utils",
+    "utilsServer",
+    ".gitignore"
+  ],
+  "watch": ["server.js"],
+  "ext": "js json"
+}
