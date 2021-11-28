@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ActiveLink from '../../../../helpers/ActiveLink';
+import ActiveLink from '../../../../util/ActiveLink';
 import styles from './NavLinks.module.css';
 
 const NavLinks = (props) => {
