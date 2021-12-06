@@ -48,6 +48,11 @@ const NavLinks = (props) => {
           </ActiveLink>
         </li>
       )}
+      {authCtx.isLoggedIn && (
+        <li>
+          <button onClick={authCtx.logout}>LOGOUT</button>
+        </li>
+      )}
     </ul>
   );
 };

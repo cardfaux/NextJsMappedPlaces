@@ -9,22 +9,40 @@ const dir = './src';
 const nextApp = next({ dev, dir });
 const handle = nextApp.getRequestHandler();
 
-// require('dotenv').config({ path: './config.env' });
+require('dotenv').config({ path: './api/config.env' });
 // const connectDb = require('./utilsServer/connectDb');
 
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+const placesRoutes = require('./api/routes/places-routes');
+const usersRoutes = require('./api/routes/users-routes');
+
+const HttpError = require('./api/models/http-error');
 
 // connectDb();
+
+app.use(express.json());
 
 nextApp
   .prepare()
   .then(() => {
-    // app.use("/api/signup", require("./api/signup"));
-    // app.use("/api/auth", require("./api/auth"));
+    app.use('/api/places', placesRoutes);
+    app.use('/api/users', usersRoutes);
 
     app.all('*', (req, res) => handle(req, res));
+
+    app.use((req, res, next) => {
+      const error = new HttpError('Could not find this route', 404);
+      throw error;
+    });
+
+    app.use((error, req, res, next) => {
+      if (res.headerSent) {
+        return next(error);
+      }
+      res.status(error.code || 500);
+      res.json({ message: error.message || 'An unkown error occured!' });
+    });
 
     server.listen(PORT, (err) => {
       if (err) throw err;

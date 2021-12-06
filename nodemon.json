@@ -1,6 +1,7 @@
 {
   "verbose": true,
   "ignore": [
+    ".git",
     "node_modules",
     ".next",
     "components",
@@ -9,8 +10,9 @@
     "public",
     "utils",
     "utilsServer",
-    ".gitignore"
+    ".gitignore",
+    "src"
   ],
-  "watch": ["server.js"],
+  "watch": ["server.js", "api"],
   "ext": "js json"
 }
